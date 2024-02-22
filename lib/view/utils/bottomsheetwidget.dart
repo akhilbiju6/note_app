@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/control/noteacreen_control.dart';
 
 class BottomSheetWidget extends StatefulWidget {
-  const BottomSheetWidget({super.key});
-
+  const BottomSheetWidget({super.key, this.adddata});
+  final Function()? adddata;
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
 }
@@ -102,13 +103,19 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
             ElevatedButton(onPressed: () {
+              Navigator.pop(context);
               
             }, child: Text("cancel",style: TextStyle(
               fontWeight: FontWeight.bold,fontSize: 17
             ),)),
             SizedBox(width: 20,),
             ElevatedButton(onPressed: () {
+              NoteScreenController
+              setState(() {
               
+              });
+              
+              Navigator.pop(context);
             }, child: Text("save",style: TextStyle(
               fontWeight: FontWeight.bold,fontSize: 17
             ),))]),

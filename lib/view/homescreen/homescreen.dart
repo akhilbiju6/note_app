@@ -1,17 +1,23 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:note_app/control/noteacreen_control.dart';
 import 'package:note_app/view/utils/bottomsheetwidget.dart';
 import 'package:note_app/view/utils/notetilewidget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.deletedata});
+  final Function()? deletedata;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+  
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 2,
+              itemCount:NoteScreenController.notedata.length,
               itemBuilder: (context, index) {
-            return NoteTileWidget();
+            return NoteTileWidget(
+              title:NoteScreenController. notedata[index]["title"],
+              date:NoteScreenController. notedata[index]["date"],
+              description: NoteScreenController.notedata[index]["description"],
+              deletedata: NoteScreenController.deletedata(index),
+              
+
+            );
             
                     },),
           ),
@@ -43,7 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.add),
                   onPressed: () {
                     showModalBottomSheet(context: context, builder: (context) {
-                      return BottomSheetWidget();
+                      return BottomSheetWidget(
+                        adddata:NoteScreen
+                        
+                      );
                     },);
                   
                 },),

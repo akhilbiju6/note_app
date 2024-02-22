@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/control/noteacreen_control.dart';
 
 class NoteTileWidget extends StatefulWidget {
-  const NoteTileWidget({super.key});
+  const NoteTileWidget({super.key, required this.title,required this.description,required this.date,this.deletedata});
+  final String title;
+  final String  description;
+  final String date;
+  final  Function()? deletedata;
 
   @override
   State<NoteTileWidget> createState() => _NoteTileWidgetState();
@@ -10,6 +15,8 @@ class NoteTileWidget extends StatefulWidget {
 class _NoteTileWidgetState extends State<NoteTileWidget> {
   @override
   Widget build(BuildContext context) {
+    
+
     return   Column(
       children: [
         Container(
@@ -21,14 +28,15 @@ class _NoteTileWidgetState extends State<NoteTileWidget> {
                              children: [
                                Padding(
                                  padding: const EdgeInsets.all(8.0),
-                                 child: Text("title",style: TextStyle(
+                                 child: Text( widget.title
+                                 ,style: TextStyle(
                                   fontSize: 25,color: Colors.black,
                                   fontWeight: FontWeight.bold
                                  ),),
                                ),
                              ],
                            ),
-                           SizedBox(width: 200,),
+                           SizedBox(width: 150,),
                            Column(crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Icon(Icons.edit)
@@ -36,7 +44,8 @@ class _NoteTileWidgetState extends State<NoteTileWidget> {
                            ),SizedBox(width: 20,),
                            Column(
                             children: [
-                              Icon(Icons.delete)
+                              InkWell(onTap:
+                                child: Icon(Icons.delete))
                             ],
                            )
                           ],
@@ -45,9 +54,13 @@ class _NoteTileWidgetState extends State<NoteTileWidget> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("description",style: TextStyle(
-                                fontWeight: FontWeight.w800,color: Colors.black,fontSize: 20
-                              ),),
+                              child: Container(
+                                width: 200,
+                                child: Text(widget.description,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,color: Colors.black,fontSize: 20
+                                ),),
+                              ),
                             )
                           ],
                         ),
@@ -55,7 +68,7 @@ class _NoteTileWidgetState extends State<NoteTileWidget> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("Tue,feb 20,2024",
+                              child: Text(widget.date,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,fontSize: 18
                               ),),
@@ -69,8 +82,8 @@ class _NoteTileWidgetState extends State<NoteTileWidget> {
                         )
                       ],
                     ),
-                    height: 150,
                     width: 350,
+                    
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.yellow
